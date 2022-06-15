@@ -1,0 +1,75 @@
+https://practice.geeksforgeeks.org/problems/infix-to-postfix-1587115620/1/?page=2&category[]=Stack&sortBy=accuracy
+
+class Solution {
+  public:
+    // Function to convert an infix expression to a postfix expression.
+    int precedence(char op) {
+        if(op == '+' || op == '-') {
+            return 1;
+        }
+        else if(op == '*' || op == '/') {
+            return 2;
+        }
+        else {
+            return 3;
+        }
+    }
+    
+    // Function to convert an infix expression to a postfix expression.
+    string infixToPostfix(string s) {
+         // Your code here
+        // int len = s.length();
+        stack <string> post;
+        // stack <string> pre;
+        stack <char> op;
+        string str = "";
+        
+        for(int i=0;i<s.length();i++) {
+            
+            char ch = s[i];
+            if(ch == '(') {
+                op.push(ch);
+            }
+            else if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+                str.push_back(ch);
+                post.push(str);
+            }
+            else if(ch == ')') {
+                while(op.top() != '(') {
+                    char opr = op.top();
+                    op.pop();
+                    string v2 = post.top();
+                    post.pop();
+                    
+                    str =  v2 + opr;
+                    post.push(str);
+                }
+                op.pop();
+            }
+            else if(ch == '^' || ch == '+' || ch == '-' || ch == '*' || ch == '/' ) {
+                 while(!op.empty() && op.top() != '(' && precedence(ch) <= precedence(op.top())) {
+                    char opr = op.top();
+                    op.pop();
+                    string v2 = post.top();
+                    post.pop();
+                   //cout<<v2<<" ";
+                    str = v2+opr;
+                    //cout<<str<<" ";
+                    post.push(str);
+                }
+                op.push(ch);
+            }
+        }
+        
+        while(op.size() > 0) {
+            char opr = op.top();
+            op.pop();
+            string v2 = post.top();
+            post.pop();
+            
+            str =  v2 + opr;
+            post.push(str);
+        }
+        return post.top();
+    }
+};
