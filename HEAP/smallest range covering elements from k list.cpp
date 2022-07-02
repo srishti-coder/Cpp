@@ -56,12 +56,14 @@ public:
             }
             
             // if next element exist of top element then push it into the heap and take track of max element
-            if(top->j + 1 < nums[top->i].size()){
+            
+            if(top->j + 1 < nums[top->i].size())//if col is less than the size 
+            {
                 maxi = max(maxi , nums[top->i][top->j+1]);
                 pq.push(new node(nums[top->i][top->j+1] , top->i , top->j+1));
             }
             else{              
-                break;     
+                break;    //next ele does'nt exist 
             }
         }
         
