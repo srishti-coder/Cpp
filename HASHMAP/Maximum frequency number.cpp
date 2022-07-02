@@ -23,4 +23,4 @@ int maximumFrequency(vector<int> &arr, int n)
    return maxAns; 
 }
 
-T.C.= O(N)
+T.C.=O(N)
