@@ -124,7 +124,7 @@ class Solution{
         bool diff = abs (left.second - right.second ) <=1;
         
         pair<bool,int> ans;
-        ans.second = max(left.second, right.second) + 1;
+        
         
         if(leftAns && rightAns && diff) {
            ans.first = true;
@@ -133,6 +133,9 @@ class Solution{
         {
             ans.first = false;
         }
+        
+        ans.second = max(left.second, right.second) + 1;
+        
         return ans;
     }
     bool isBalanced(Node *root)
